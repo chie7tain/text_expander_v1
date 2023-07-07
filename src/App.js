@@ -37,13 +37,13 @@ export default function App() {
 
 function TextExpander({
   children,
-  expanded,
+  expanded = false,
   collapsedNumWords = 10,
   expandButtonText = "Show more",
   collapseButtonText = "Show less",
   buttonColor = "blue",
   className,
-  onExpand,
+  onExpand = () => {},
 }) {
   const [isExpanded, setIsExpanded] = useState(expanded);
   // create a component that renders the text as the children of the component
@@ -58,7 +58,7 @@ function TextExpander({
   const collapsedText = collapsedWords.join(" ") + "...";
   const handleExpansion = () => {
     setIsExpanded(!isExpanded);
-    onExpand(!isExpanded);
+    onExpand((exp) => !exp);
   };
   return (
     <div className={className}>
@@ -72,6 +72,7 @@ function TextExpander({
           padding: "5px",
           border: "none",
           cursor: "pointer",
+          font: "inherit",
         }}
       >
         {isExpanded ? collapseButtonText : expandButtonText}
